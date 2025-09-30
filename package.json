@@ -1,0 +1,19 @@
+{
+  "name": "lambda-postech-authorizer",
+  "version": "1.0.0",
+  "description": "Lambda Authorizer para validação de JWT do Cognito",
+  "main": "app/src/index.js",
+  "scripts": {
+    "start": "node app/src/index.js"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0",
+    "jwks-rsa": "^3.0.1"
+  },
+  "author": "",
+  "license": "MIT"
+  ,
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

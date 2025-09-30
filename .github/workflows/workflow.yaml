@@ -22,6 +22,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Instalar dependências da Lambda
+        working-directory: app/src
+        run: npm install --production
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
