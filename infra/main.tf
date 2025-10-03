@@ -53,7 +53,7 @@ resource "aws_security_group" "lambda_authorizer" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Permitir todo tráfego de entrada, opcional"
+    description = "P"
   }
 
   egress {
@@ -61,7 +61,7 @@ resource "aws_security_group" "lambda_authorizer" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Permitir HTTPS para JWKS do Cognito"
+    description = "P"
   }
 }
 
