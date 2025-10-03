@@ -49,18 +49,20 @@ resource "aws_security_group" "lambda_authorizer" {
   vpc_id      =  data.aws_vpc.postech_vpc.id
 
   ingress {
-    description     = "SG authorizer"
-    from_port       = 5432
-    to_port         = 5432
-    protocol        = "tcp"
-    cidr_blocks =   ["0.0.0.0/0"]  # qualquer IP
-  }
-
-  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "Permitir todo tráfego de entrada, opcional"
+  }
+
+  # Saída liberada para qualquer destino
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Permitir HTTPS para JWKS do Cognito"
   }
 }
 
