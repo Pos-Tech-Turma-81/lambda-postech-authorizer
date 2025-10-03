@@ -3,6 +3,7 @@ const jwksClient = require('jwks-rsa');
 
 const COGNITO_USER_POOL_ID = "us-east-1_unZWrpzVR";
 const COGNITO_REGION = "us-east-1";
+
 const client = jwksClient({
   jwksUri: `https://cognito-idp.${COGNITO_REGION}.amazonaws.com/${COGNITO_USER_POOL_ID}/.well-known/jwks.json`
 });
@@ -24,6 +25,9 @@ exports.handler = async (event) => {
     return generatePolicy('user', 'Deny', event.methodArn);
   }
 
+  if (token.startsWith('Bearer ')) {
+    token = token.slice(7);
+  }
   try {
     const decoded = await new Promise((resolve, reject) => {
       jwt.verify(token, getKey, {
