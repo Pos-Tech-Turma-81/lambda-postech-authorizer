@@ -44,6 +44,20 @@ data "aws_subnet" "public_b" {
   }
 }
 
+data "aws_subnet" "private_a" {
+  filter {
+    name   = "tag:Name"
+    values = ["postech-vpc-private-us-east-1a"]
+  }
+}
+
+data "aws_subnet" "private_b" {
+  filter {
+    name   = "tag:Name"
+    values = ["postech-vpc-private-us-east-1b"]
+  }
+}
+
 resource "aws_security_group" "lambda_authorizer" {
   name        = "authorizer-sg"
   vpc_id      =  data.aws_vpc.postech_vpc.id
@@ -85,7 +99,7 @@ resource "aws_lambda_function" "lambda_authorizer" {
     source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
     vpc_config {
-        subnet_ids         = [data.aws_subnet.public_a.id, data.aws_subnet.public_b.id]
+        subnet_ids         = [data.aws_subnet.private_a.id, data.aws_subnet.private_b.id]
         security_group_ids = [aws_security_group.lambda_authorizer.id]
     }
 
