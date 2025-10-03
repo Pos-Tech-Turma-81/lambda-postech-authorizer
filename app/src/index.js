@@ -20,7 +20,7 @@ function getKey(header, callback) {
 }
 
 exports.handler = async (event) => {
-  const token = event.authorizationToken || (event.headers && event.headers.Authorization);
+  var token = event.authorizationToken || (event.headers && event.headers.Authorization);
   if (!token) {
     return generatePolicy('user', 'Deny', event.methodArn);
   }
