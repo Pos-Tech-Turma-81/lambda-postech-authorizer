@@ -56,7 +56,6 @@ resource "aws_security_group" "lambda_authorizer" {
     description = "Permitir todo tráfego de entrada, opcional"
   }
 
-  # Saída liberada para qualquer destino
   egress {
     from_port   = 443
     to_port     = 443
